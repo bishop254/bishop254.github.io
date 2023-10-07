@@ -654,18 +654,11 @@
               <input
                 formControlName="declForm"
                 hidden
-                (change)="onFileSelected($event)"
+                (change)="onFileSelected($event, 'declFormFile')"
                 #fileInput
+                accept="application/pdf"
                 type="file"
-                id="file"
               />
-              <button
-                type="button"
-                mat-raised-button
-                (click)="fileInput.click()"
-              >
-                Choose File
-              </button>
               <mat-error
                 *ngIf="
                   uploadDetailsForm.controls['declForm'].hasError('required')
@@ -683,18 +676,6 @@
                 Signed Declaration Form has been
                 <strong>uploaded</strong>
               </p>
-            </div>
-            <div>
-              <mat-label>Parent(s) National ID</mat-label>
-              <input
-                formControlName="parentIds"
-                hidden
-                (change)="onFileSelected($event)"
-                #fileInput
-                type="file"
-                accept="pdf"
-                id="file"
-              />
               <button
                 type="button"
                 mat-raised-button
@@ -702,6 +683,17 @@
               >
                 Choose File
               </button>
+            </div>
+            <div>
+              <mat-label>Parent(s) National ID</mat-label>
+              <input
+                formControlName="parentIds"
+                hidden
+                (change)="onFileSelected($event, 'parentIdsFile')"
+                #fileInputPid
+                type="file"
+                accept="application/pdf"
+              />
               <mat-error
                 *ngIf="
                   uploadDetailsForm.controls['parentIds'].hasError('required')
@@ -719,6 +711,192 @@
                 Parent(s) National ID has been
                 <strong>uploaded</strong>
               </p>
+              <button
+                type="button"
+                mat-raised-button
+                (click)="fileInputPid.click()"
+              >
+                Choose File
+              </button>
+            </div>
+            <div>
+              <mat-label>Student ID</mat-label>
+              <input
+                formControlName="studId"
+                hidden
+                (change)="onFileSelected($event, 'studIdFile')"
+                #fileInputStudId
+                type="file"
+                accept="application/pdf"
+              />
+
+              <mat-error
+                *ngIf="
+                  uploadDetailsForm.controls['studId'].hasError('required')
+                "
+              >
+                Student ID is
+                <strong>required</strong>
+              </mat-error>
+              <p
+                class="succ"
+                *ngIf="
+                  !uploadDetailsForm.controls['studId'].hasError('required')
+                "
+              >
+                Student ID has been
+                <strong>uploaded</strong>
+              </p>
+              <button
+                type="button"
+                mat-raised-button
+                (click)="fileInputStudId.click()"
+              >
+                Choose File
+              </button>
+            </div>
+            <div>
+              <mat-label>Student Birth Cert</mat-label>
+              <input
+                formControlName="studBirthCert"
+                hidden
+                (change)="onFileSelected($event, 'studBirthCertFile')"
+                #fileInputStudBcrt
+                type="file"
+                accept="application/pdf"
+              />
+              <mat-error
+                *ngIf="
+                  uploadDetailsForm.controls['studBirthCert'].hasError(
+                    'required'
+                  )
+                "
+              >
+                Student Birth Certificate is
+                <strong>required</strong>
+              </mat-error>
+              <p
+                class="succ"
+                *ngIf="
+                  !uploadDetailsForm.controls['studBirthCert'].hasError(
+                    'required'
+                  )
+                "
+              >
+                Student Birth Certificate has been
+                <strong>uploaded</strong>
+              </p>
+              <button
+                type="button"
+                mat-raised-button
+                (click)="fileInputStudBcrt.click()"
+              >
+                Choose File
+              </button>
+            </div>
+            <div>
+              <mat-label>Parent(s) Death Certificate(optional)</mat-label>
+              <input
+                formControlName="parentDeathCert"
+                hidden
+                (change)="onFileSelected($event, 'parentDeathCertFile')"
+                #fileInputParDeathcrt
+                type="file"
+                accept="application/pdf"
+              />
+              <mat-error
+                *ngIf="
+                  uploadDetailsForm.controls['parentDeathCert'].hasError(
+                    'required'
+                  )
+                "
+              >
+                Parent(s) Death Certificate is
+                <strong>required</strong>
+              </mat-error>
+              <p class="succ" *ngIf="parentDeathCertFile !== null">
+                Parent(s) Death Certificate has been
+                <strong>uploaded</strong>
+              </p>
+              <button
+                type="button"
+                mat-raised-button
+                (click)="fileInputParDeathcrt.click()"
+              >
+                Choose File
+              </button>
+            </div>
+            <div>
+              <mat-label>Report Form/Transcripts</mat-label>
+              <input
+                formControlName="transcripts"
+                hidden
+                (change)="onFileSelected($event, 'reportFormTransFile')"
+                #fileInputTransc
+                type="file"
+                accept="application/pdf"
+              />
+              <mat-error
+                *ngIf="
+                  uploadDetailsForm.controls['transcripts'].hasError('required')
+                "
+              >
+                Report Form/Transcripts is
+                <strong>required</strong>
+              </mat-error>
+              <p
+                class="succ"
+                *ngIf="
+                  !uploadDetailsForm.controls['transcripts'].hasError(
+                    'required'
+                  )
+                "
+              >
+                Report Form/Transcripts has been
+                <strong>uploaded</strong>
+              </p>
+              <button
+                type="button"
+                mat-raised-button
+                (click)="fileInputTransc.click()"
+              >
+                Choose File
+              </button>
+            </div>
+            <div>
+              <mat-label>Admission Letter</mat-label>
+              <input
+                formControlName="admLett"
+                hidden
+                (change)="onFileSelected($event, 'admLetterFile')"
+                #fileInputAdmLett
+                type="file"
+                accept="application/pdf"
+              />
+              <mat-error
+                *ngIf="
+                  uploadDetailsForm.controls['admLett'].hasError('required')
+                "
+              >
+                Admission Letter is
+                <strong>required</strong>
+              </mat-error>
+              <p
+                class="succ"
+                *ngIf="
+                  !uploadDetailsForm.controls['admLett'].hasError('required')
+                "
+              >
+                Admission Letter has been
+                <strong>uploaded</strong>
+              </p>
+              <button
+                type="button"
+                mat-raised-button
+                (click)="fileInputAdmLett.click()"
+              >
+                Choose File
+              </button>
             </div>
           </div>
         </div>

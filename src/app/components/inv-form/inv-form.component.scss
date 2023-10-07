@@ -7,7 +7,7 @@
   // margin-top: 20px;
   width: 80%;
   height: fit-content;
-  margin: 7rem auto;
+  margin: 2rem auto;
   box-shadow: black;
   // border: 2px solid;
   // border-radius: 10px;
@@ -79,7 +79,11 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        margin-bottom: 1rem;
+        margin-bottom: 0.5rem;
+        flex-wrap: wrap;
+        border: 1px solid lightgrey;
+        padding: 0.5rem;
+        border-radius: 8px;
 
         .succ {
           color: green;

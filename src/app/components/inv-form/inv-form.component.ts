@@ -136,10 +136,26 @@ export class InvFormComponent implements OnInit {
   uploadDetailsForm = this._formBuilder.group({
     declForm: ['', [Validators.required]],
     parentIds: ['', [Validators.required]],
+    studId: ['', [Validators.required]],
+    studBirthCert: ['', [Validators.required]],
+    parentDeathCert: [''],
+    transcripts: ['', [Validators.required]],
+    admLett: ['', [Validators.required]],
   });
 
   isLinear = false;
   srcResult: any;
+
+  declFormFile: any;
+  parentIdsFile: any;
+  studIdFile: any;
+  studBirthCertFile: any;
+  parentDeathCertFile: any = null;
+  reportFormTransFile: any;
+  resultSlipFile: any;
+  admLetterFile: any;
+  schLeavingCertFile: any;
+  feeStructFile: any;
   constructor(
     private _formBuilder: FormBuilder,
     private snackBar: MatSnackBar,
@@ -221,7 +237,7 @@ export class InvFormComponent implements OnInit {
     this.familyDetailsForm.controls['motherPhone'].updateValueAndValidity();
   }
 
-  onFileSelected(event: Event): void {
+  onFileSelected(event: Event, fileName: string): void {
     const inputNode: any = event.target;
 
     if (typeof FileReader !== 'undefined') {
@@ -237,6 +253,38 @@ export class InvFormComponent implements OnInit {
     console.log(this.srcResult, inputNode.files[0]);
     console.log('this.uploadDetailsForm.value');
     console.log(this.uploadDetailsForm.value);
-    
+
+    switch (fileName) {
+      case 'declFormFile':
+        this.declFormFile = inputNode.files[0];
+        break;
+
+      case 'parentIdsFile':
+        this.parentIdsFile = inputNode.files[0];
+        break;
+
+      case 'studIdFile':
+        this.studIdFile = inputNode.files[0];
+        break;
+
+      case 'studBirthCertFile':
+        this.studBirthCertFile = inputNode.files[0];
+        break;
+
+      case 'parentDeathCertFile':
+        this.parentDeathCertFile = inputNode.files[0];
+        break;
+
+      case 'reportFormTransFile':
+        this.reportFormTransFile = inputNode.files[0];
+        break;
+
+      case 'admLetterFile':
+        this.admLetterFile = inputNode.files[0];
+        break;
+
+      default:
+        break;
+    }
   }
 }
