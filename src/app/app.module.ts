@@ -17,6 +17,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { StudRegComponent } from './components/stud-reg/stud-reg.component';
 import { MatSelectModule } from '@angular/material/select';
 import { HttpClientModule } from '@angular/common/http';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [AppComponent, InvFormComponent, StudRegComponent],
@@ -32,6 +33,7 @@ import { HttpClientModule } from '@angular/common/http';
     MatDatepickerModule,
     ReactiveFormsModule,
     MatNativeDateModule,
+    MatIconModule,
     MatSelectModule,
     HttpClientModule,
   ],

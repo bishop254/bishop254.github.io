@@ -22,7 +22,7 @@
     justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
-    
+
     div {
       width: 100%;
       ::ng-deep mat-form-field {
@@ -30,13 +30,13 @@
         margin: 0 3px;
       }
     }
-    
+
     ::ng-deep mat-form-field {
       width: 48%;
       margin: 0 3px;
     }
   }
-  
+
   .itemContSmall {
     display: flex;
     justify-content: space-between;
@@ -44,30 +44,47 @@
     flex-wrap: wrap;
     flex-direction: column;
     width: 100%;
-    
-    div{
+
+    div {
       width: 100%;
     }
-    
+
     ::ng-deep mat-form-field {
       width: 100%;
       margin: 0 3px;
     }
   }
-  
+
   .persCont {
     display: flex;
     flex-direction: row;
     background-size: cover;
     border-bottom: 1px solid;
-    margin-bottom: .5rem;
-    
+    margin-bottom: 0.5rem;
+
     img {
       flex: 2;
       width: 50%;
       margin: 1rem;
       border-top-right-radius: 10px;
       border-top-left-radius: 10px;
+    }
+
+    .btnCont {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      margin: 1rem;
+      div {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1rem;
+
+        .succ {
+          color: green;
+        }
+      }
     }
   }
 }

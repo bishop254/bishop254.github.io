@@ -1,14 +1,10 @@
 <div class="mainCont">
-  <mat-stepper [linear]="isLinear" #stepper>
+  <mat-vertical-stepper [linear]="isLinear" #stepper>
     <mat-step [stepControl]="basicDetailsForm">
       <form [formGroup]="basicDetailsForm">
         <ng-template matStepLabel>Fill out your Personal details</ng-template>
         <div class="persCont">
-          <img
-            *ngIf="!(isSmallScreen$ | async)"
-            src="assets/4372417.jpg"
-            alt=""
-          />
+          <img *ngIf="!(isSmallScreen$ | async)" src="assets/info.jpg" alt="" />
           <div class="itemCont" id="persContForm">
             <div>
               <mat-form-field>
@@ -148,8 +144,6 @@
                   Constituency is <strong>required</strong>
                 </mat-error>
               </mat-form-field>
-            </div>
-            <div>
               <mat-form-field>
                 <mat-label>Ward</mat-label>
                 <mat-select formControlName="ward" required>
@@ -188,7 +182,7 @@
           </div>
           <img
             *ngIf="!(isSmallScreen$ | async)"
-            src="assets/4372417.jpg"
+            src="assets/location.jpg"
             alt=""
           />
         </div>
@@ -200,10 +194,38 @@
     </mat-step>
     <mat-step [stepControl]="familyDetailsForm">
       <form [formGroup]="familyDetailsForm">
-        <ng-template matStepLabel>Fill out your Family details</ng-template>
+        <ng-template matStepLabel>Fill out your Father's details</ng-template>
         <div class="persCont">
+          <img
+            *ngIf="!(isSmallScreen$ | async)"
+            src="assets/father.jpg"
+            alt=""
+          />
           <div class="itemCont">
             <div>
+              <mat-form-field>
+                <mat-label>Is your father alive?</mat-label>
+                <mat-select
+                  formControlName="fatherAlive"
+                  (selectionChange)="fatherInfoRequired()"
+                  required
+                >
+                  <mat-option value="na"
+                    >I do not know about my father</mat-option
+                  >
+                  <mat-option value="true">Yes</mat-option>
+                  <mat-option value="false">No</mat-option>
+                </mat-select>
+                <mat-error
+                  *ngIf="
+                    familyDetailsForm.controls['fatherAlive'].hasError(
+                      'required'
+                    )
+                  "
+                >
+                  Father's Status is <strong>required</strong>
+                </mat-error>
+              </mat-form-field>
               <mat-form-field>
                 <mat-label>Father's Name</mat-label>
                 <input
@@ -221,47 +243,136 @@
                   Father's name is <strong>required</strong>
                 </mat-error>
               </mat-form-field>
-            </div>
-            <div>
               <mat-form-field>
-                <mat-label>Ward</mat-label>
-                <mat-select formControlName="ward" required>
-                  <mat-option value="">Select One</mat-option>
-                  <mat-option
-                    *ngFor="let ward of selectedWards"
-                    [value]="ward"
-                    >{{ ward }}</mat-option
-                  >
-                </mat-select>
-                <mat-error
-                  *ngIf="
-                    locationDetailsForm.controls['ward'].hasError('required')
-                  "
-                >
-                  Ward is <strong>required</strong>
-                </mat-error>
-              </mat-form-field>
-              <mat-form-field>
-                <mat-label>Village</mat-label>
+                <mat-label>Father's Occupation</mat-label>
                 <input
                   matInput
-                  placeholder="pinji"
-                  formControlName="village"
-                  required
+                  placeholder="Last name, First name"
+                  formControlName="fatherOccupation"
                 />
                 <mat-error
                   *ngIf="
-                    locationDetailsForm.controls['village'].hasError('required')
+                    familyDetailsForm.controls['fatherOccupation'].hasError(
+                      'required'
+                    )
                   "
                 >
-                  Village is <strong>required</strong>
+                  Father's Occupation is <strong>required</strong>
+                </mat-error>
+              </mat-form-field>
+              <mat-form-field>
+                <mat-label>Father's Phone</mat-label>
+                <input
+                  matInput
+                  placeholder="0722xxxxxx"
+                  formControlName="fatherPhone"
+                  type="number"
+                />
+                <mat-error
+                  *ngIf="
+                    familyDetailsForm.controls['fatherPhone'].hasError(
+                      'required'
+                    )
+                  "
+                >
+                  Father's Phone is <strong>required</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <button mat-raised-button color="primary" matStepperNext>Next</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step [stepControl]="familyDetailsForm">
+      <form [formGroup]="familyDetailsForm">
+        <ng-template matStepLabel>Fill out your Mother's details</ng-template>
+        <div class="persCont">
+          <div class="itemCont">
+            <div>
+              <mat-form-field>
+                <mat-label>Is your mother alive?</mat-label>
+                <mat-select
+                  formControlName="motherAlive"
+                  (selectionChange)="motherInfoRequired()"
+                  required
+                >
+                  <mat-option value="na"
+                    >I do not know about my mother</mat-option
+                  >
+                  <mat-option value="true">Yes</mat-option>
+                  <mat-option value="false">No</mat-option>
+                </mat-select>
+                <mat-error
+                  *ngIf="
+                    familyDetailsForm.controls['motherAlive'].hasError(
+                      'required'
+                    )
+                  "
+                >
+                  Mother's Status is <strong>required</strong>
+                </mat-error>
+              </mat-form-field>
+              <mat-form-field>
+                <mat-label>Mother's Name</mat-label>
+                <input
+                  matInput
+                  placeholder="Last name, First name"
+                  formControlName="motherName"
+                />
+                <mat-error
+                  *ngIf="
+                    familyDetailsForm.controls['motherName'].hasError(
+                      'required'
+                    )
+                  "
+                >
+                  Mother's name is <strong>required</strong>
+                </mat-error>
+              </mat-form-field>
+              <mat-form-field>
+                <mat-label>Mother's Occupation</mat-label>
+                <input
+                  matInput
+                  placeholder="Cook | Self Employed"
+                  formControlName="motherOccupation"
+                />
+                <mat-error
+                  *ngIf="
+                    familyDetailsForm.controls['motherOccupation'].hasError(
+                      'required'
+                    )
+                  "
+                >
+                  Mother's Occupation is <strong>required</strong>
+                </mat-error>
+              </mat-form-field>
+              <mat-form-field>
+                <mat-label>Mother's Phone</mat-label>
+                <input
+                  matInput
+                  placeholder="0722xxxxxx"
+                  formControlName="motherPhone"
+                  type="number"
+                />
+                <mat-error
+                  *ngIf="
+                    familyDetailsForm.controls['motherPhone'].hasError(
+                      'required'
+                    )
+                  "
+                >
+                  Mother's Phone is <strong>required</strong>
                 </mat-error>
               </mat-form-field>
             </div>
           </div>
           <img
             *ngIf="!(isSmallScreen$ | async)"
-            src="assets/4372417.jpg"
+            src="assets/mother.jpg"
             alt=""
           />
         </div>
@@ -271,79 +382,352 @@
         </div>
       </form>
     </mat-step>
-    <!-- <mat-step [stepControl]="buyerForm" label="Fill out the Buyer details">
-      <form [formGroup]="buyerForm">
-        <mat-form-field>
-          <mat-label>Buyer Name/Business Name</mat-label>
-          <input
-            matInput
-            placeholder="Last name, First name"
-            formControlName="name"
-            required
+    <mat-step [stepControl]="sponsorDetailsForm">
+      <form [formGroup]="sponsorDetailsForm">
+        <ng-template matStepLabel>Fill out your Guardian's details</ng-template>
+        <div class="persCont">
+          <img
+            *ngIf="!(isSmallScreen$ | async)"
+            src="assets/guardian.jpg"
+            alt=""
           />
-          <mat-error
-            *ngIf="myDetailsForm.controls['name'].hasError('required')"
-          >
-            Buyer Name is <strong>required</strong>
-          </mat-error>
-        </mat-form-field>
-        <mat-form-field>
-          <mat-label>Buyer Address</mat-label>
-          <input
-            matInput
-            placeholder="52262 - 23233"
-            formControlName="address"
-            required
-          />
-          <mat-error
-            *ngIf="myDetailsForm.controls['address'].hasError('required')"
-          >
-            Buyer Address is <strong>required</strong>
-          </mat-error>
-        </mat-form-field>
-        <mat-form-field>
-          <mat-label>Buyer Phone Number</mat-label>
-          <input
-            matInput
-            placeholder="7017200192"
-            formControlName="phoneNumber"
-            required
-          />
-          <mat-error
-            *ngIf="myDetailsForm.controls['phoneNumber'].hasError('required')"
-          >
-            Buyer Phone Number is <strong>required</strong>
-          </mat-error>
-          <mat-error
-            *ngIf="myDetailsForm.controls['phoneNumber'].hasError('pattern')"
-          >
-            Buyer Phone Number is <strong>invalid</strong>
-          </mat-error>
-        </mat-form-field>
-        <mat-form-field>
-          <mat-label>Buyer Email</mat-label>
-          <input
-            matInput
-            placeholder="abc@test.com"
-            formControlName="email"
-            required
-          />
-          <mat-error
-            *ngIf="myDetailsForm.controls['email'].hasError('required')"
-          >
-            Buyer Email is <strong>required</strong>
-          </mat-error>
-          <mat-error *ngIf="myDetailsForm.controls['email'].hasError('email')">
-            Buyer Email is <strong>invalid</strong>
-          </mat-error>
-        </mat-form-field>
+          <div class="itemCont">
+            <div>
+              <mat-form-field>
+                <mat-label>How many brothers/sisters do you have?</mat-label>
+                <input matInput placeholder="2" formControlName="siblingsNum" />
+                <mat-error
+                  *ngIf="
+                    sponsorDetailsForm.controls['siblingsNum'].hasError(
+                      'required'
+                    )
+                  "
+                >
+                  Number of siblings is <strong>required</strong>
+                </mat-error>
+              </mat-form-field>
+              <mat-form-field>
+                <mat-label
+                  >Name of person(s) who pays your school fees</mat-label
+                >
+                <input
+                  matInput
+                  placeholder="Last name, First name"
+                  formControlName="sponsorName"
+                />
+                <mat-error
+                  *ngIf="
+                    sponsorDetailsForm.controls['sponsorName'].hasError(
+                      'required'
+                    )
+                  "
+                >
+                  Name of person(s) who pays your school fees of siblings is
+                  <strong>required</strong>
+                </mat-error>
+              </mat-form-field>
+              <mat-form-field>
+                <mat-label>What is His/Her Occupation?</mat-label>
+                <input
+                  matInput
+                  placeholder="Cook | Self Employed"
+                  formControlName="sponsorOccupation"
+                />
+                <mat-error
+                  *ngIf="
+                    sponsorDetailsForm.controls['sponsorOccupation'].hasError(
+                      'required'
+                    )
+                  "
+                >
+                  His/Her Occupation is <strong>required</strong>
+                </mat-error>
+              </mat-form-field>
+              <mat-form-field>
+                <mat-label>What is His/Her Phone Number?</mat-label>
+                <input
+                  matInput
+                  placeholder="07xxxxxxxx"
+                  formControlName="sponsorPhone"
+                />
+                <mat-error
+                  *ngIf="
+                    sponsorDetailsForm.controls['sponsorPhone'].hasError(
+                      'required'
+                    )
+                  "
+                >
+                  His/Her Phone Number is <strong>required</strong>
+                </mat-error>
+              </mat-form-field>
+              <mat-form-field>
+                <mat-label>Your relationship with him/her?</mat-label>
+                <input
+                  matInput
+                  placeholder="Father | Uncle"
+                  formControlName="sponsorRelationship"
+                />
+                <mat-error
+                  *ngIf="
+                    sponsorDetailsForm.controls['sponsorRelationship'].hasError(
+                      'required'
+                    )
+                  "
+                >
+                  Your relationship with him/her is <strong>required</strong>
+                </mat-error>
+              </mat-form-field>
+              <mat-form-field>
+                <mat-label>How many children does the guardian have?</mat-label>
+                <input
+                  matInput
+                  placeholder="2"
+                  formControlName="sponsorChildrenNum"
+                  type="number"
+                />
+                <mat-error
+                  *ngIf="
+                    sponsorDetailsForm.controls['sponsorChildrenNum'].hasError(
+                      'required'
+                    )
+                  "
+                >
+                  How many children does the guardian have is
+                  <strong>required</strong>
+                </mat-error>
+              </mat-form-field>
+              <mat-form-field>
+                <mat-label>How many are working/in-business/farming?</mat-label>
+                <input
+                  matInput
+                  placeholder="2"
+                  formControlName="sponsorChildrenWorking"
+                  type="number"
+                />
+                <mat-error
+                  *ngIf="
+                    sponsorDetailsForm.controls[
+                      'sponsorChildrenWorking'
+                    ].hasError('required')
+                  "
+                >
+                  How many are working/in-business/farming is
+                  <strong>required</strong>
+                </mat-error>
+              </mat-form-field>
+              <mat-form-field>
+                <mat-label>How many are in Secondary School?</mat-label>
+                <input
+                  matInput
+                  placeholder="2"
+                  formControlName="sponsorChildrenSecond"
+                  type="number"
+                />
+                <mat-error
+                  *ngIf="
+                    sponsorDetailsForm.controls[
+                      'sponsorChildrenSecond'
+                    ].hasError('required')
+                  "
+                >
+                  How many are in Secondary School is
+                  <strong>required</strong>
+                </mat-error>
+              </mat-form-field>
+              <mat-form-field>
+                <mat-label
+                  >How many are in Post Secondary Institutions?</mat-label
+                >
+                <input
+                  matInput
+                  placeholder="2"
+                  formControlName="sponsorChildrenPostSecond"
+                  type="number"
+                />
+                <mat-error
+                  *ngIf="
+                    sponsorDetailsForm.controls[
+                      'sponsorChildrenPostSecond'
+                    ].hasError('required')
+                  "
+                >
+                  How many are in Post Secondary Institutions is
+                  <strong>required</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+
         <div>
-          <button mat-button matStepperPrevious>Back</button>
-          <button mat-button matStepperNext>Next</button>
+          <button mat-raised-button color="primary" matStepperNext>Next</button>
         </div>
       </form>
-    </mat-step> -->
+    </mat-step>
+    <mat-step [stepControl]="instDetailsForm">
+      <form [formGroup]="instDetailsForm">
+        <ng-template matStepLabel
+          >Fill out the Institution's details</ng-template
+        >
+        <div class="persCont">
+          <img *ngIf="!(isSmallScreen$ | async)" src="assets/inst.jpg" alt="" />
+          <div class="itemCont">
+            <div>
+              <mat-form-field>
+                <mat-label
+                  >Name of Institution to join / Current Institution</mat-label
+                >
+                <input
+                  matInput
+                  placeholder="XYZ University"
+                  formControlName="instName"
+                />
+                <mat-error
+                  *ngIf="
+                    instDetailsForm.controls['instName'].hasError('required')
+                  "
+                >
+                  Name of Institution to join / Current Institution is
+                  <strong>required</strong>
+                </mat-error>
+              </mat-form-field>
+              <mat-form-field>
+                <mat-label>Bank Name of Institution</mat-label>
+                <input matInput placeholder="KCB" formControlName="instBank" />
+                <mat-error
+                  *ngIf="
+                    instDetailsForm.controls['instBank'].hasError('required')
+                  "
+                >
+                  Bank Name of Institution is
+                  <strong>required</strong>
+                </mat-error>
+              </mat-form-field>
+              <mat-form-field>
+                <mat-label>Bank Branch of Institution</mat-label>
+                <input
+                  matInput
+                  placeholder="Rondo"
+                  formControlName="instBranch"
+                />
+                <mat-error
+                  *ngIf="
+                    instDetailsForm.controls['instBranch'].hasError('required')
+                  "
+                >
+                  Bank Branch of Institution is
+                  <strong>required</strong>
+                </mat-error>
+              </mat-form-field>
+              <mat-form-field>
+                <mat-label>Institution's Account Number</mat-label>
+                <input
+                  matInput
+                  placeholder="2876 6261 2716 1672"
+                  formControlName="instAccNo"
+                />
+                <mat-error
+                  *ngIf="
+                    instDetailsForm.controls['instAccNo'].hasError('required')
+                  "
+                >
+                  Institution's Account Number is <strong>required</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
 
+        <div>
+          <button mat-raised-button color="primary" matStepperNext>Next</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step [stepControl]="uploadDetailsForm">
+      <form [formGroup]="uploadDetailsForm">
+        <ng-template matStepLabel>Upload required documents</ng-template>
+        <div class="persCont">
+          <!-- <img *ngIf="!(isSmallScreen$ | async)" src="assets/inst.jpg" alt="" /> -->
+          <div class="btnCont">
+            <div>
+              <mat-label>Signed Declaration Form</mat-label>
+              <input
+                formControlName="declForm"
+                hidden
+                (change)="onFileSelected($event)"
+                #fileInput
+                type="file"
+                id="file"
+              />
+              <button
+                type="button"
+                mat-raised-button
+                (click)="fileInput.click()"
+              >
+                Choose File
+              </button>
+              <mat-error
+                *ngIf="
+                  uploadDetailsForm.controls['declForm'].hasError('required')
+                "
+              >
+                Declaration Form is
+                <strong>required</strong>
+              </mat-error>
+              <p
+                class="succ"
+                *ngIf="
+                  !uploadDetailsForm.controls['declForm'].hasError('required')
+                "
+              >
+                Signed Declaration Form has been
+                <strong>uploaded</strong>
+              </p>
+            </div>
+            <div>
+              <mat-label>Parent(s) National ID</mat-label>
+              <input
+                formControlName="parentIds"
+                hidden
+                (change)="onFileSelected($event)"
+                #fileInput
+                type="file"
+                accept="pdf"
+                id="file"
+              />
+              <button
+                type="button"
+                mat-raised-button
+                (click)="fileInput.click()"
+              >
+                Choose File
+              </button>
+              <mat-error
+                *ngIf="
+                  uploadDetailsForm.controls['parentIds'].hasError('required')
+                "
+              >
+                Parent(s) National ID is
+                <strong>required</strong>
+              </mat-error>
+              <p
+                class="succ"
+                *ngIf="
+                  !uploadDetailsForm.controls['parentIds'].hasError('required')
+                "
+              >
+                Parent(s) National ID has been
+                <strong>uploaded</strong>
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <button mat-raised-button color="primary" matStepperNext>Next</button>
+        </div>
+      </form>
+    </mat-step>
     <mat-step>
       <ng-template matStepLabel>Done</ng-template>
       <p>You are now done. Click on submit to generate the invoice</p>
@@ -352,5 +736,5 @@
         <button mat-button (click)="submit()" matStepperPrevious>Submit</button>
       </div>
     </mat-step>
-  </mat-stepper>
+  </mat-vertical-stepper>
 </div>
