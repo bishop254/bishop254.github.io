@@ -14,9 +14,12 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 
 import { ReactiveFormsModule } from '@angular/forms';
+import { StudRegComponent } from './components/stud-reg/stud-reg.component';
+import { MatSelectModule } from '@angular/material/select';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
-  declarations: [AppComponent, InvFormComponent],
+  declarations: [AppComponent, InvFormComponent, StudRegComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -29,6 +32,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatDatepickerModule,
     ReactiveFormsModule,
     MatNativeDateModule,
+    MatSelectModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

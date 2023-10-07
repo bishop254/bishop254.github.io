@@ -1,5 +1,5 @@
-::ng-deep body{
-  background-image: url('/assets/4372417.jpg');
+::ng-deep body {
+  background-image: url("/assets/4372417.jpg");
   background-size: cover;
 }
 
@@ -7,7 +7,7 @@
   // margin-top: 20px;
   width: 80%;
   height: fit-content;
-  margin: 1.5rem auto;
+  margin: 7rem auto;
   box-shadow: black;
   // border: 2px solid;
   // border-radius: 10px;
@@ -17,9 +17,57 @@
     flex-direction: column;
   }
 
-  .itemCont{
+  .itemCont {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    flex-wrap: wrap;
+    
+    div {
+      width: 100%;
+      ::ng-deep mat-form-field {
+        width: 100%;
+        margin: 0 3px;
+      }
+    }
+    
+    ::ng-deep mat-form-field {
+      width: 48%;
+      margin: 0 3px;
+    }
+  }
+  
+  .itemContSmall {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    flex-direction: column;
+    width: 100%;
+    
+    div{
+      width: 100%;
+    }
+    
+    ::ng-deep mat-form-field {
+      width: 100%;
+      margin: 0 3px;
+    }
+  }
+  
+  .persCont {
+    display: flex;
+    flex-direction: row;
+    background-size: cover;
+    border-bottom: 1px solid;
+    margin-bottom: .5rem;
+    
+    img {
+      flex: 2;
+      width: 50%;
+      margin: 1rem;
+      border-top-right-radius: 10px;
+      border-top-left-radius: 10px;
+    }
   }
 }

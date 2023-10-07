@@ -1,80 +1,278 @@
 <div class="mainCont">
   <mat-stepper [linear]="isLinear" #stepper>
-    <mat-step [stepControl]="myDetailsForm">
-      <form [formGroup]="myDetailsForm">
-        <ng-template matStepLabel>Fill out your details</ng-template>
-        <mat-form-field>
-          <mat-label>Name/Business Name</mat-label>
-          <input
-            matInput
-            placeholder="Last name, First name"
-            formControlName="name"
-            required
+    <mat-step [stepControl]="basicDetailsForm">
+      <form [formGroup]="basicDetailsForm">
+        <ng-template matStepLabel>Fill out your Personal details</ng-template>
+        <div class="persCont">
+          <img
+            *ngIf="!(isSmallScreen$ | async)"
+            src="assets/4372417.jpg"
+            alt=""
           />
-          <mat-error
-            *ngIf="myDetailsForm.controls['name'].hasError('required')"
-          >
-            Name is <strong>required</strong>
-          </mat-error>
-        </mat-form-field>
-        <mat-form-field>
-          <mat-label>Address</mat-label>
-          <input
-            matInput
-            placeholder="52262 - 23233"
-            formControlName="address"
-            required
-          />
-          <mat-error
-            *ngIf="myDetailsForm.controls['address'].hasError('required')"
-          >
-            Address is <strong>required</strong>
-          </mat-error>
-        </mat-form-field>
-        <mat-form-field>
-          <mat-label>Phone Number</mat-label>
-          <input
-            matInput
-            placeholder="7017200192"
-            formControlName="phoneNumber"
-            required
-          />
-          <mat-error
-            *ngIf="myDetailsForm.controls['phoneNumber'].hasError('required')"
-          >
-            Phone Number is <strong>required</strong>
-          </mat-error>
-          <mat-error
-            *ngIf="myDetailsForm.controls['phoneNumber'].hasError('pattern')"
-          >
-            Phone Number is <strong>invalid</strong>
-          </mat-error>
-        </mat-form-field>
-        <mat-form-field>
-          <mat-label>Email</mat-label>
-          <input
-            matInput
-            placeholder="abc@test.com"
-            formControlName="email"
-            required
-          />
-          <mat-error
-            *ngIf="myDetailsForm.controls['email'].hasError('required')"
-          >
-            Email is <strong>required</strong>
-          </mat-error>
-          <mat-error *ngIf="myDetailsForm.controls['email'].hasError('email')">
-            Email is <strong>invalid</strong>
-          </mat-error>
-        </mat-form-field>
+          <div class="itemCont" id="persContForm">
+            <div>
+              <mat-form-field>
+                <mat-label>Full Name</mat-label>
+                <input
+                  matInput
+                  placeholder="Last name, First name"
+                  formControlName="name"
+                  required
+                />
+                <mat-error
+                  *ngIf="basicDetailsForm.controls['name'].hasError('required')"
+                >
+                  Name is <strong>required</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <mat-form-field>
+              <mat-label>Gender</mat-label>
+              <mat-select formControlName="gender" required>
+                <mat-option value="M">Male</mat-option>
+                <mat-option value="F">Female</mat-option>
+              </mat-select>
+              <mat-error
+                *ngIf="basicDetailsForm.controls['gender'].hasError('required')"
+              >
+                Gender is <strong>required</strong>
+              </mat-error>
+            </mat-form-field>
+            <mat-form-field>
+              <mat-label>Age</mat-label>
+              <input
+                matInput
+                placeholder="18"
+                formControlName="age"
+                required
+                type="number"
+              />
+              <mat-error
+                *ngIf="basicDetailsForm.controls['age'].hasError('required')"
+              >
+                Age is <strong>required</strong>
+              </mat-error>
+            </mat-form-field>
+            <mat-form-field>
+              <mat-label>Year/Form</mat-label>
+              <input
+                matInput
+                placeholder="18"
+                formControlName="formYear"
+                required
+                type="text"
+              />
+              <mat-error
+                *ngIf="
+                  basicDetailsForm.controls['formYear'].hasError('required')
+                "
+              >
+                Year/Form is <strong>required</strong>
+              </mat-error>
+            </mat-form-field>
+            <mat-form-field>
+              <mat-label>Phone</mat-label>
+              <input
+                matInput
+                type="number"
+                placeholder="Phone"
+                formControlName="phone"
+                required
+              />
+              <mat-error
+                *ngIf="basicDetailsForm.controls['phone'].hasError('required')"
+              >
+                Phone is <strong>required</strong>
+              </mat-error>
+            </mat-form-field>
+            <mat-form-field>
+              <mat-label>Course</mat-label>
+              <mat-select formControlName="course" required>
+                <mat-option value="olevel">O-Level</mat-option>
+                <mat-option value="certificate">Certificate</mat-option>
+                <mat-option value="diploma">Diploma</mat-option>
+                <mat-option value="degree">Degree</mat-option>
+                <mat-option value="na">Other</mat-option>
+              </mat-select>
+              <mat-error
+                *ngIf="basicDetailsForm.controls['course'].hasError('required')"
+              >
+                Course is <strong>required</strong>
+              </mat-error>
+            </mat-form-field>
+            <mat-form-field
+              *ngIf="basicDetailsForm.controls['course'].value == 'na'"
+            >
+              <mat-label>Other</mat-label>
+              <input
+                matInput
+                placeholder="Online Degree"
+                formControlName="other"
+              />
+            </mat-form-field>
+          </div>
+        </div>
+
         <div>
-          <button mat-button matStepperNext>Next</button>
+          <button mat-raised-button color="primary" matStepperNext>Next</button>
         </div>
       </form>
     </mat-step>
-    <mat-step [stepControl]="buyerForm" label="Fill out the Buyer details">
+    <mat-step [stepControl]="locationDetailsForm">
+      <form [formGroup]="locationDetailsForm">
+        <ng-template matStepLabel>Fill out your Location details</ng-template>
+        <div class="persCont">
+          <div class="itemCont">
+            <div>
+              <mat-form-field>
+                <mat-label>Constituency</mat-label>
+                <mat-select
+                  formControlName="constituency"
+                  (selectionChange)="filterWards()"
+                  required
+                >
+                  <mat-option value="">Select One</mat-option>
+                  <mat-option
+                    *ngFor="let constit of migoriConstData"
+                    [value]="constit['constituency']"
+                    >{{ constit["constituency"] }}</mat-option
+                  >
+                </mat-select>
+                <mat-error
+                  *ngIf="
+                    locationDetailsForm.controls['constituency'].hasError(
+                      'required'
+                    )
+                  "
+                >
+                  Constituency is <strong>required</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div>
+              <mat-form-field>
+                <mat-label>Ward</mat-label>
+                <mat-select formControlName="ward" required>
+                  <mat-option value="">Select One</mat-option>
+                  <mat-option
+                    *ngFor="let ward of selectedWards"
+                    [value]="ward"
+                    >{{ ward }}</mat-option
+                  >
+                </mat-select>
+                <mat-error
+                  *ngIf="
+                    locationDetailsForm.controls['ward'].hasError('required')
+                  "
+                >
+                  Ward is <strong>required</strong>
+                </mat-error>
+              </mat-form-field>
+              <mat-form-field>
+                <mat-label>Village</mat-label>
+                <input
+                  matInput
+                  placeholder="pinji"
+                  formControlName="village"
+                  required
+                />
+                <mat-error
+                  *ngIf="
+                    locationDetailsForm.controls['village'].hasError('required')
+                  "
+                >
+                  Village is <strong>required</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+          <img
+            *ngIf="!(isSmallScreen$ | async)"
+            src="assets/4372417.jpg"
+            alt=""
+          />
+        </div>
+
+        <div>
+          <button mat-raised-button color="primary" matStepperNext>Next</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step [stepControl]="familyDetailsForm">
+      <form [formGroup]="familyDetailsForm">
+        <ng-template matStepLabel>Fill out your Family details</ng-template>
+        <div class="persCont">
+          <div class="itemCont">
+            <div>
+              <mat-form-field>
+                <mat-label>Father's Name</mat-label>
+                <input
+                  matInput
+                  placeholder="Last name, First name"
+                  formControlName="fatherName"
+                />
+                <mat-error
+                  *ngIf="
+                    familyDetailsForm.controls['fatherName'].hasError(
+                      'required'
+                    )
+                  "
+                >
+                  Father's name is <strong>required</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div>
+              <mat-form-field>
+                <mat-label>Ward</mat-label>
+                <mat-select formControlName="ward" required>
+                  <mat-option value="">Select One</mat-option>
+                  <mat-option
+                    *ngFor="let ward of selectedWards"
+                    [value]="ward"
+                    >{{ ward }}</mat-option
+                  >
+                </mat-select>
+                <mat-error
+                  *ngIf="
+                    locationDetailsForm.controls['ward'].hasError('required')
+                  "
+                >
+                  Ward is <strong>required</strong>
+                </mat-error>
+              </mat-form-field>
+              <mat-form-field>
+                <mat-label>Village</mat-label>
+                <input
+                  matInput
+                  placeholder="pinji"
+                  formControlName="village"
+                  required
+                />
+                <mat-error
+                  *ngIf="
+                    locationDetailsForm.controls['village'].hasError('required')
+                  "
+                >
+                  Village is <strong>required</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+          <img
+            *ngIf="!(isSmallScreen$ | async)"
+            src="assets/4372417.jpg"
+            alt=""
+          />
+        </div>
+
+        <div>
+          <button mat-raised-button color="primary" matStepperNext>Next</button>
+        </div>
+      </form>
+    </mat-step>
+    <!-- <mat-step [stepControl]="buyerForm" label="Fill out the Buyer details">
       <form [formGroup]="buyerForm">
-        <!-- <ng-template matStepLabel>Fill out the Buyer details</ng-template> -->
         <mat-form-field>
           <mat-label>Buyer Name/Business Name</mat-label>
           <input
@@ -144,207 +342,8 @@
           <button mat-button matStepperNext>Next</button>
         </div>
       </form>
-    </mat-step>
-    <mat-step
-      [stepControl]="invoiceDetails"
-      label="Fill out your Invoice details(Dates)"
-    >
-      <form [formGroup]="invoiceDetails">
-        <mat-form-field class="example-form-field">
-          <mat-label>Invoice Date</mat-label>
-          <input
-            matInput
-            [matDatepicker]="datepicker"
-            formControlName="invoiceDate"
-          />
-          <mat-hint>MM/DD/YYYY</mat-hint>
-          <mat-datepicker-toggle
-            matIconSuffix
-            [for]="datepicker"
-          ></mat-datepicker-toggle>
-          <mat-datepicker #datepicker>
-            <mat-datepicker-actions>
-              <button mat-button matDatepickerCancel>Cancel</button>
-              <button mat-raised-button color="primary" matDatepickerApply>
-                Apply
-              </button>
-            </mat-datepicker-actions>
-          </mat-datepicker>
+    </mat-step> -->
 
-          <mat-error
-            *ngIf="invoiceDetails.controls['invoiceDate'].hasError('required')"
-          >
-            Invoice Date is <strong>required</strong>
-          </mat-error>
-        </mat-form-field>
-
-        <mat-form-field class="example-form-field">
-          <mat-label>Payment Due Date</mat-label>
-          <input
-            matInput
-            [matDatepicker]="datepicker2"
-            formControlName="dueDate"
-            [min]="invoiceDetails['controls'].invoiceDate.value"
-          />
-          <mat-hint>MM/DD/YYYY</mat-hint>
-          <mat-datepicker-toggle
-            matIconSuffix
-            [for]="datepicker2"
-          ></mat-datepicker-toggle>
-          <mat-datepicker #datepicker2>
-            <mat-datepicker-actions>
-              <button mat-button matDatepickerCancel>Cancel</button>
-              <button mat-raised-button color="primary" matDatepickerApply>
-                Apply
-              </button>
-            </mat-datepicker-actions>
-          </mat-datepicker>
-
-          <mat-error
-            *ngIf="invoiceDetails.controls['dueDate'].hasError('required')"
-          >
-            Due Date is <strong>required</strong>
-          </mat-error>
-        </mat-form-field>
-
-        <div>
-          <button mat-button matStepperPrevious>Back</button>
-          <button mat-button matStepperNext>Next</button>
-        </div>
-      </form>
-    </mat-step>
-    <mat-step
-      [stepControl]="paymentsForm"
-      label="Fill out your Tax/Discount/Fee details"
-    >
-      <form [formGroup]="paymentsForm">
-        <div class="itemCont">
-          <mat-form-field>
-            <mat-label>Tax(%)</mat-label>
-            <input
-              matInput
-              placeholder="16"
-              formControlName="tax"
-              type="number"
-            />
-            <mat-error
-              *ngIf="paymentsForm.controls['tax'].hasError('required')"
-            >
-              Tax(%) is <strong>required</strong>
-            </mat-error>
-            <mat-error *ngIf="paymentsForm.controls['tax'].hasError('min')">
-              Tax(%) is <strong>it too low</strong>
-            </mat-error>
-            <mat-error *ngIf="paymentsForm.controls['tax'].hasError('max')">
-              Tax(%) is <strong>it too high</strong>
-            </mat-error>
-          </mat-form-field>
-          <mat-form-field>
-            <mat-label>Fee(KES)</mat-label>
-            <input
-              matInput
-              placeholder="1566"
-              formControlName="fee"
-              type="number"
-            />
-            <mat-error *ngIf="paymentsForm.controls['fee'].hasError('min')">
-              Fee is <strong>it too low</strong>
-            </mat-error>
-          </mat-form-field>
-          <mat-form-field>
-            <mat-label>Discount(KES)</mat-label>
-            <input
-              matInput
-              placeholder="156"
-              formControlName="discount"
-              type="number"
-            />
-            <mat-error
-              *ngIf="paymentsForm.controls['discount'].hasError('min')"
-            >
-              Discount is <strong>it too low</strong>
-            </mat-error>
-          </mat-form-field>
-        </div>
-
-        <div>
-          <button mat-button matStepperPrevious>Back</button>
-          <button mat-button matStepperNext>Next</button>
-        </div>
-      </form>
-    </mat-step>
-    <mat-step
-      [stepControl]="itemsForm"
-      label="Fill out the items being purchased"
-    >
-      <form [formGroup]="itemsForm">
-        <div class="itemCont">
-          <mat-form-field>
-            <mat-label>Item Name</mat-label>
-            <input
-              matInput
-              placeholder="Sugar"
-              formControlName="itemName"
-              required
-              type="text"
-            />
-          </mat-form-field>
-          <mat-form-field>
-            <mat-label>Item Price</mat-label>
-            <input
-              matInput
-              placeholder="130"
-              formControlName="itemPrice"
-              required
-              type="number"
-            />
-            <mat-error *ngIf="itemsForm.controls['itemPrice'].hasError('min')">
-              Price is <strong>it too low</strong>
-            </mat-error>
-          </mat-form-field>
-          <mat-form-field>
-            <mat-label>Item Quantity</mat-label>
-            <input
-              matInput
-              placeholder="10"
-              formControlName="itemQuantity"
-              required
-              type="number"
-            />
-            <mat-error
-              *ngIf="itemsForm.controls['itemQuantity'].hasError('min')"
-            >
-              Quantity is <strong>it too low</strong>
-            </mat-error>
-          </mat-form-field>
-          <button
-            mat-button
-            color="secondary"
-            (click)="addItem()"
-            [disabled]="!itemsForm.controls['itemName'].value"
-          >
-            Add Item
-          </button>
-        </div>
-        <hr />
-        <div class="itemCont">
-          <mat-card *ngFor="let item of itemsArray">
-            <mat-card-content>
-              <strong>Quantity:</strong> {{ item["itemQuantity"] }} <br />
-              <strong>Item:</strong> {{ item["itemName"] }} <br />
-              <strong>Price:</strong> {{ item["itemPrice"] }}
-            </mat-card-content>
-          </mat-card>
-        </div>
-
-        <div>
-          <button mat-button matStepperPrevious>Back</button>
-          <button mat-button matStepperNext [disabled]="itemsArray.length <= 0">
-            Next
-          </button>
-        </div>
-      </form>
-    </mat-step>
     <mat-step>
       <ng-template matStepLabel>Done</ng-template>
       <p>You are now done. Click on submit to generate the invoice</p>
