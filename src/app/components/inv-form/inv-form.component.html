@@ -898,6 +898,76 @@
                 Choose File
               </button>
             </div>
+            <div>
+              <mat-label>School Leaving Certificate</mat-label>
+              <input
+                formControlName="leavCert"
+                hidden
+                (change)="onFileSelected($event, 'schLeavingCertFile')"
+                #fileInputLeavCert
+                type="file"
+                accept="application/pdf"
+              />
+              <mat-error
+                *ngIf="
+                  uploadDetailsForm.controls['leavCert'].hasError('required')
+                "
+              >
+                School Leaving Certificate is
+                <strong>required</strong>
+              </mat-error>
+              <p
+                class="succ"
+                *ngIf="
+                  !uploadDetailsForm.controls['leavCert'].hasError('required')
+                "
+              >
+                School Leaving Certificate has been
+                <strong>uploaded</strong>
+              </p>
+              <button
+                type="button"
+                mat-raised-button
+                (click)="fileInputLeavCert.click()"
+              >
+                Choose File
+              </button>
+            </div>
+            <div>
+              <mat-label>Fee Structure</mat-label>
+              <input
+                formControlName="feeStruct"
+                hidden
+                (change)="onFileSelected($event, 'feeStructFile')"
+                #fileInputFeeStruct
+                type="file"
+                accept="application/pdf"
+              />
+              <mat-error
+                *ngIf="
+                  uploadDetailsForm.controls['feeStruct'].hasError('required')
+                "
+              >
+                Fee Structure is
+                <strong>required</strong>
+              </mat-error>
+              <p
+                class="succ"
+                *ngIf="
+                  !uploadDetailsForm.controls['feeStruct'].hasError('required')
+                "
+              >
+                Fee Structure has been
+                <strong>uploaded</strong>
+              </p>
+              <button
+                type="button"
+                mat-raised-button
+                (click)="fileInputFeeStruct.click()"
+              >
+                Choose File
+              </button>
+            </div>
           </div>
         </div>
 
@@ -908,7 +978,7 @@
     </mat-step>
     <mat-step>
       <ng-template matStepLabel>Done</ng-template>
-      <p>You are now done. Click on submit to generate the invoice</p>
+      <p>You are now done. Click on submit to send your details</p>
       <div>
         <button mat-button matStepperPrevious>Back</button>
         <button mat-button (click)="submit()" matStepperPrevious>Submit</button>

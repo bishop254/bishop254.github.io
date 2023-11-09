@@ -110,7 +110,6 @@ export class InvFormComponent implements OnInit {
     motherOccupation: [''],
     motherPhone: [''],
     motherAlive: ['', [Validators.required]],
-    village: [''],
     pollingStation: [''],
   });
 
@@ -141,6 +140,8 @@ export class InvFormComponent implements OnInit {
     parentDeathCert: [''],
     transcripts: ['', [Validators.required]],
     admLett: ['', [Validators.required]],
+    leavCert: ['', [Validators.required]],
+    feeStruct: ['', [Validators.required]],
   });
 
   isLinear = false;
@@ -156,6 +157,7 @@ export class InvFormComponent implements OnInit {
   admLetterFile: any;
   schLeavingCertFile: any;
   feeStructFile: any;
+
   constructor(
     private _formBuilder: FormBuilder,
     private snackBar: MatSnackBar,
@@ -281,6 +283,14 @@ export class InvFormComponent implements OnInit {
 
       case 'admLetterFile':
         this.admLetterFile = inputNode.files[0];
+        break;
+
+      case 'schLeavingCertFile':
+        this.schLeavingCertFile = inputNode.files[0];
+        break;
+
+      case 'feeStructFile':
+        this.feeStructFile = inputNode.files[0];
         break;
 
       default:
