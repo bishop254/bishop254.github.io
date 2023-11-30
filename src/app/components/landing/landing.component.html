@@ -1,0 +1,43 @@
+<div class="mainCont">
+  <div class="formCont">
+    <img src="/assets/logomig.jpg" alt="" />
+    <h2>Bursary Application</h2>
+    <br />
+    <div class="formCont">
+      <form [formGroup]="basicDetailsForm">
+        <mat-form-field>
+          <mat-label>Type</mat-label>
+          <mat-select formControlName="type" required>
+            <mat-option value="bursary">Bursary</mat-option>
+            <mat-option value="scholarship" disabled="true"
+              >Scholarship</mat-option
+            >
+          </mat-select>
+          <mat-error
+            *ngIf="basicDetailsForm.controls['type'].hasError('required')"
+          >
+            Type is <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+        <br>
+        <mat-form-field>
+          <mat-label>Education Level</mat-label>
+          <mat-select formControlName="education" required>
+            <mat-option value="highschool">High School</mat-option>
+            <mat-option value="tertiary">Tertiary Inst</mat-option>
+          </mat-select>
+          <mat-error
+            *ngIf="basicDetailsForm.controls['education'].hasError('required')"
+          >
+            Course is <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+      </form>
+      <button mat-raised-button color="primary" [disabled]="!basicDetailsForm.valid">
+        <!-- <p> -->
+          <a routerLink="/apply"> Proceed </a>
+        <!-- </p> -->
+      </button>
+    </div>
+  </div>
+</div>

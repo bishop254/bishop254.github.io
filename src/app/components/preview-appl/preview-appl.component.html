@@ -1,0 +1,44 @@
+<!-- src/app/student/student.component.html -->
+
+<div class="mainCont">
+  <div class="section">
+    <h3>Family Details</h3>
+    <p>Father's Name: {{ data.fatherName }}</p>
+    <p>Father's Occupation: {{ data.fatherOccupation }}</p>
+    <p>Father's Phone: {{ data.fatherPhone }}</p>
+    <p>Father Alive: {{ data.fatherAlive }}</p>
+    <p>Mother's Name: {{ data.motherName }}</p>
+    <p>Mother's Occupation: {{ data.motherOccupation }}</p>
+    <p>Mother's Phone: {{ data.motherPhone }}</p>
+    <p>Mother Alive: {{ data.motherAlive }}</p>
+  </div>
+  <div class="section">
+    <h3>School Details</h3>
+    <p>Age: {{ data.age }}</p>
+    <p>Date of Birth: {{ data.dob | date : "yyyy-MM-dd" }}</p>
+    <p>Form Year: {{ data.formYear }}</p>
+    <p>Phone: {{ data.phone }}</p>
+    <p>Course: {{ data.course }}</p>
+    <p>Polling Station: {{ data.pollingStation }}</p>
+    <p>Siblings Number: {{ data.siblingsNum }}</p>
+  </div>
+  <div class="section">
+    <h3>Sponsor Details</h3>
+    <p>Sponsor Name: {{ data.sponsorName }}</p>
+    <p>Sponsor Occupation: {{ data.sponsorOccupation }}</p>
+    <p>Sponsor Phone: {{ data.sponsorPhone }}</p>
+    <p>Sponsor Relationship: {{ data.sponsorRelationship }}</p>
+    <p>Sponsor Children Number: {{ data.sponsorChildrenNum }}</p>
+    <p>Sponsor Children Working: {{ data.sponsorChildrenWorking }}</p>
+    <p>Sponsor Children Second: {{ data.sponsorChildrenSecond }}</p>
+    <p>Sponsor Children Post Second: {{ data.sponsorChildrenPostSecond }}</p>
+  </div>
+  <div class="section">
+    <h3>Institution Details</h3>
+    <p>Institution Name: {{ data.instName }}</p>
+    <p>Institution Bank: {{ data.instBank }}</p>
+    <p>Institution Branch: {{ data.instBranch }}</p>
+    <p>Institution Account No: {{ data.instAccNo }}</p>
+  </div>
+ 
+</div>

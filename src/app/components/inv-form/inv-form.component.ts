@@ -7,6 +7,11 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import * as pdfMake from 'pdfmake/build/pdfmake';
 import * as pdfFonts from 'pdfmake/build/vfs_fonts';
 import { Observable, map } from 'rxjs';
+import { HttpServService } from 'src/app/services/http-serv.service';
+import { Router } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
+import { PreviewApplComponent } from '../preview-appl/preview-appl.component';
+import { FinalComponent } from '../final/final.component';
 (pdfMake as any).vfs = pdfFonts.pdfMake.vfs;
 
 @Component({
@@ -88,6 +93,7 @@ export class InvFormComponent implements OnInit {
     name: ['', Validators.required],
     gender: ['', Validators.required],
     age: [0, Validators.required],
+    dob: ['', Validators.required],
     formYear: ['', Validators.required],
     phone: [0, Validators.required],
     course: ['', Validators.required],
@@ -161,7 +167,10 @@ export class InvFormComponent implements OnInit {
   constructor(
     private _formBuilder: FormBuilder,
     private snackBar: MatSnackBar,
-    private breakpointObserver: BreakpointObserver
+    private breakpointObserver: BreakpointObserver,
+    private httpServ: HttpServService,
+    private router: Router,
+    public dialog: MatDialog
   ) {}
 
   ngOnInit(): void {}
@@ -178,7 +187,61 @@ export class InvFormComponent implements OnInit {
       })
     );
 
-  submit() {}
+  submit() {
+    let dob: any = this.basicDetailsForm.controls.dob.value;
+    const formattedDate = this.formatDateToYYYYMMDD(dob);
+    let model = {
+      ...this.basicDetailsForm.value,
+      ...this.locationDetailsForm.value,
+      ...this.familyDetailsForm.value,
+      ...this.sponsorDetailsForm.value,
+      ...this.instDetailsForm.value,
+      dob: formattedDate,
+      pollingStation: this.locationDetailsForm.value.village,
+    };
+
+    const formData = new FormData();
+    formData.append('declForm', this.declFormFile);
+    formData.append('parentIds', this.parentIdsFile);
+    formData.append('studId', this.studIdFile);
+    formData.append('studBirthCert', this.studBirthCertFile);
+    formData.append('admLett', this.admLetterFile);
+    formData.append('parentDeathCert', this.parentDeathCertFile);
+    formData.append('leavCert', this.schLeavingCertFile);
+    formData.append('feeStruct', this.feeStructFile);
+    formData.append('transcripts', this.reportFormTransFile);
+
+    formData.append('payload', JSON.stringify(model));
+
+    this.httpServ.postReq('', formData).subscribe({
+      next: (resp: any) => {
+        if (resp['statusCode'] === 201) {
+          this.snackBar.open(resp['message'], 'success', {
+            duration: 5000,
+          });
+          this.basicDetailsForm.reset();
+          this.locationDetailsForm.reset();
+          this.familyDetailsForm.reset();
+          this.sponsorDetailsForm.reset();
+          this.instDetailsForm.reset();
+          this.uploadDetailsForm.reset();
+
+          const dialogRef = this.dialog.open(FinalComponent, {
+            data: resp['data']['studentData'],
+            width: '85%',
+          });
+
+          dialogRef.afterClosed().subscribe((result) => {
+            console.log('The dialog was closed');
+          });
+        }
+      },
+      error: (err) => {
+        console.error(err);
+        console.error(err);
+      },
+    });
+  }
 
   filterWards() {
     let selectedConsit =
@@ -296,5 +359,39 @@ export class InvFormComponent implements OnInit {
       default:
         break;
     }
+  }
+
+  formatDateToYYYYMMDD(inputDate: any) {
+    const parsedDate: any = new Date(inputDate);
+
+    if (isNaN(parsedDate)) {
+      return 'Invalid Date'; // Return an error message if the input date is invalid.
+    }
+
+    const year = parsedDate.getFullYear();
+    const month = String(parsedDate.getMonth() + 1).padStart(2, '0'); // Months are zero-based.
+    const day = String(parsedDate.getDate()).padStart(2, '0');
+
+    return `${year}-${month}-${day}`;
+  }
+
+  openDialog(): void {
+    let model = {
+      ...this.basicDetailsForm.value,
+      ...this.locationDetailsForm.value,
+      ...this.familyDetailsForm.value,
+      ...this.sponsorDetailsForm.value,
+      ...this.instDetailsForm.value,
+      pollingStation: this.locationDetailsForm.value.village,
+      // ...this.uploadDetailsForm.value,
+    };
+    const dialogRef = this.dialog.open(PreviewApplComponent, {
+      data: { ...model },
+      width: '55%',
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log('The dialog was closed');
+    });
   }
 }

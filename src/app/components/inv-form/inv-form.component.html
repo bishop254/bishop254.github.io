@@ -49,6 +49,16 @@
                 Age is <strong>required</strong>
               </mat-error>
             </mat-form-field>
+            <mat-form-field class="example-full-width">
+              <mat-label>Date of Birth</mat-label>
+              <input matInput [matDatepicker]="picker1" formControlName="dob" />
+              <mat-hint>MM/DD/YYYY</mat-hint>
+              <mat-datepicker-toggle
+                matIconSuffix
+                [for]="picker1"
+              ></mat-datepicker-toggle>
+              <mat-datepicker #picker1></mat-datepicker>
+            </mat-form-field>
             <mat-form-field>
               <mat-label>Year/Form</mat-label>
               <input
@@ -56,7 +66,7 @@
                 placeholder="18"
                 formControlName="formYear"
                 required
-                type="text"
+                type="number"
               />
               <mat-error
                 *ngIf="
@@ -213,8 +223,8 @@
                   <mat-option value="na"
                     >I do not know about my father</mat-option
                   >
-                  <mat-option value="true">Yes</mat-option>
-                  <mat-option value="false">No</mat-option>
+                  <mat-option value="yes">Yes</mat-option>
+                  <mat-option value="no">No</mat-option>
                 </mat-select>
                 <mat-error
                   *ngIf="
@@ -267,6 +277,7 @@
                   placeholder="0722xxxxxx"
                   formControlName="fatherPhone"
                   type="number"
+          
                 />
                 <mat-error
                   *ngIf="
@@ -303,8 +314,8 @@
                   <mat-option value="na"
                     >I do not know about my mother</mat-option
                   >
-                  <mat-option value="true">Yes</mat-option>
-                  <mat-option value="false">No</mat-option>
+                  <mat-option value="yes">Yes</mat-option>
+                  <mat-option value="no">No</mat-option>
                 </mat-select>
                 <mat-error
                   *ngIf="
@@ -449,6 +460,7 @@
                   matInput
                   placeholder="07xxxxxxxx"
                   formControlName="sponsorPhone"
+                  type="number"
                 />
                 <mat-error
                   *ngIf="
@@ -625,6 +637,7 @@
                   matInput
                   placeholder="2876 6261 2716 1672"
                   formControlName="instAccNo"
+                  type="number"
                 />
                 <mat-error
                   *ngIf="
@@ -981,7 +994,8 @@
       <p>You are now done. Click on submit to send your details</p>
       <div>
         <button mat-button matStepperPrevious>Back</button>
-        <button mat-button (click)="submit()" matStepperPrevious>Submit</button>
+        <button mat-button (click)="openDialog()">Preview</button>
+        <button mat-button (click)="submit()">Submit</button>
       </div>
     </mat-step>
   </mat-vertical-stepper>

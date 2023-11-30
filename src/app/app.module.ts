@@ -14,13 +14,22 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 
 import { ReactiveFormsModule } from '@angular/forms';
-import { StudRegComponent } from './components/stud-reg/stud-reg.component';
 import { MatSelectModule } from '@angular/material/select';
 import { HttpClientModule } from '@angular/common/http';
 import { MatIconModule } from '@angular/material/icon';
+import { MatDialogModule } from '@angular/material/dialog';
+import { PreviewApplComponent } from './components/preview-appl/preview-appl.component';
+import { LandingComponent } from './components/landing/landing.component';
+import { FinalComponent } from './components/final/final.component';
 
 @NgModule({
-  declarations: [AppComponent, InvFormComponent, StudRegComponent],
+  declarations: [
+    AppComponent,
+    InvFormComponent,
+    PreviewApplComponent,
+    LandingComponent,
+    FinalComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -36,6 +45,7 @@ import { MatIconModule } from '@angular/material/icon';
     MatIconModule,
     MatSelectModule,
     HttpClientModule,
+    MatDialogModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

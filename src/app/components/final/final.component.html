@@ -1,0 +1,17 @@
+<mat-card class="example-card">
+  <mat-card-header>
+    <div mat-card-avatar class="example-header-image"></div>
+    <mat-card-title>{{data['name']}}</mat-card-title>
+    <mat-card-subtitle>Ward : {{data['ward']}}</mat-card-subtitle>
+  </mat-card-header>
+  <img mat-card-image src="/assets/succ.jpg" alt="Success">
+  <mat-card-content>
+    <p>
+      Dear {{data['name']}},
+      Your details have been successfully captured.
+
+      Application ID : {{data['_id']}}.
+    </p>
+    <small>Keep your Application ID safe(take a picture, write it down)</small>
+  </mat-card-content>
+</mat-card>
