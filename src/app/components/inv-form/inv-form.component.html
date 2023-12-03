@@ -60,6 +60,23 @@
               <mat-datepicker #picker1></mat-datepicker>
             </mat-form-field>
             <mat-form-field>
+              <mat-label>Admission Number</mat-label>
+              <input
+                matInput
+                placeholder="XS2212"
+                formControlName="admNo"
+                required
+                type="text"
+              />
+              <mat-error
+                *ngIf="
+                  basicDetailsForm.controls['admNo'].hasError('required')
+                "
+              >
+                Admission Number is <strong>required</strong>
+              </mat-error>
+            </mat-form-field>
+            <mat-form-field>
               <mat-label>Year/Form</mat-label>
               <input
                 matInput

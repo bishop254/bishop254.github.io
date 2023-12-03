@@ -13,8 +13,11 @@ h3 {
 }
 
 .mainCont {
-  padding: 20px;
-  height: 90vh;
+    padding: 20px;
+    height: 90vh;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
 }
 
 .example-card {

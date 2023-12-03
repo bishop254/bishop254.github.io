@@ -94,6 +94,7 @@ export class InvFormComponent implements OnInit {
     gender: ['', Validators.required],
     age: [0, Validators.required],
     dob: ['', Validators.required],
+    admNo: ['', Validators.required],
     formYear: ['', Validators.required],
     phone: [0, Validators.required],
     course: ['', Validators.required],
@@ -232,7 +233,7 @@ export class InvFormComponent implements OnInit {
           });
 
           dialogRef.afterClosed().subscribe((result) => {
-            console.log('The dialog was closed');
+            this.router.navigate(['/']);
           });
         }
       },
