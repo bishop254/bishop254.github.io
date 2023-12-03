@@ -9,7 +9,7 @@ export class HttpServService {
   constructor(private http: HttpClient) {}
 
   public postReq(endpoint: string, model: any): Observable<any> {
-    endpoint = 'https://53ad-197-237-73-99.ngrok-free.app/bursary/register';
+    endpoint = 'https://0e16-41-90-65-6.ngrok-free.app/bursary/register';
     return this.http.post(endpoint, model);
   }
 }
