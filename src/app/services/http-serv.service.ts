@@ -10,6 +10,10 @@ export class HttpServService {
 
   public postReq(endpoint: string, model: any): Observable<any> {
     endpoint = 'https://0e16-41-90-65-6.ngrok-free.app/bursary/register';
-    return this.http.post(endpoint, model);
-  }
+    return this.http.post(endpoint, model, {
+      headers: {
+        'ngrok-skip-browser-warning': 'true',
+      },
+    });
+  } 
 }
