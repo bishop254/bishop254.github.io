@@ -16,7 +16,8 @@ export class HttpServService {
   }
 
   public postReq(endpoint: string, model: any): Observable<any> {
-    endpoint = 'https://bd37-41-90-70-159.ngrok-free.app/bursary/register';
+    // endpoint = 'https://bd37-41-90-70-159.ngrok-free.app/bursary/register';
+    endpoint = 'http://localhost:3000/bursary/register';
     return this.http.post(endpoint, model, {
       headers: this.genHeaders(),
     });
