@@ -1,41 +1,8 @@
-# version: '2.0'
-
-# services:
-#   web:
-#     build: .
-#     restart: always
-#     ports:
-#       - 4300:80
-
-version: "2"
+version: '2.0'
 
 services:
-  nginx:
-    container_name: "nginx_server"
-    build:
-      context: ./config
-    ports:
-      - 80:80
-      - 443:443
-    volumes:
-      - ./config:/config
-      - /etc/letsencrypt:/etc/letsencrypt:ro
-      - /tmp/acme-challenge:/tmp/acme-challenge
-    networks:
-      - app
+  web: 
+    build: .
     restart: always
-
-  letsencrypt:
-    container_name: "certbot"
-    image: certbot/certbot
-    command: sh -c "certbot certonly --webroot -w /tmp/acme-challenge/ -d mig.bursary.com --text --agree-tos --email eyeofchiuri@gmail.com --rsa-key-size 4096 --verbose --keep-until-expiring --preferred-challenges=http"
-    entrypoint: ""
-    volumes:
-      - "/etc/letsencrypt:/etc/letsencrypt"
-      - "/tmp/acme-challenge:/tmp/acme-challenge"
-    environment:
-      - TERM=xterm
-
-networks:
-  app:
-    driver: bridge
+    ports: 
+      - 4300:80
