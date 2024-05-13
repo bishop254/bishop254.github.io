@@ -4,7 +4,7 @@
       <form [formGroup]="basicDetailsForm">
         <ng-template matStepLabel>Fill out your Personal details</ng-template>
         <div class="persCont">
-          <img *ngIf="!(isSmallScreen$ | async)" src="assets/info.jpg" alt="" />
+          <img *ngIf="!(isSmallScreen$ | async)" src="./assets/info.jpg" alt="" />
           <div class="itemCont" id="persContForm">
             <div>
               <mat-form-field>
@@ -209,7 +209,7 @@
           </div>
           <img
             *ngIf="!(isSmallScreen$ | async)"
-            src="assets/location.jpg"
+            src="./assets/location.jpg"
             alt=""
           />
         </div>
@@ -225,7 +225,7 @@
         <div class="persCont">
           <img
             *ngIf="!(isSmallScreen$ | async)"
-            src="assets/father.jpg"
+            src="./assets/father.jpg"
             alt=""
           />
           <div class="itemCont">
@@ -400,7 +400,7 @@
           </div>
           <img
             *ngIf="!(isSmallScreen$ | async)"
-            src="assets/mother.jpg"
+            src="./assets/mother.jpg"
             alt=""
           />
         </div>
@@ -416,7 +416,7 @@
         <div class="persCont">
           <img
             *ngIf="!(isSmallScreen$ | async)"
-            src="assets/guardian.jpg"
+            src="./assets/guardian.jpg"
             alt=""
           />
           <div class="itemCont">
@@ -599,7 +599,7 @@
           >Fill out the Institution's details</ng-template
         >
         <div class="persCont">
-          <img *ngIf="!(isSmallScreen$ | async)" src="assets/inst.jpg" alt="" />
+          <img *ngIf="!(isSmallScreen$ | async)" src="./assets/inst.jpg" alt="" />
           <div class="itemCont">
             <div>
               <mat-form-field>
@@ -677,7 +677,7 @@
       <form [formGroup]="uploadDetailsForm">
         <ng-template matStepLabel>Upload required documents</ng-template>
         <div class="persCont">
-          <!-- <img *ngIf="!(isSmallScreen$ | async)" src="assets/inst.jpg" alt="" /> -->
+          <!-- <img *ngIf="!(isSmallScreen$ | async)" src="./assets/inst.jpg" alt="" /> -->
           <div class="btnCont">
             <div>
               <mat-label>Signed Declaration Form</mat-label>
