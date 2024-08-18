@@ -1,27 +1,38 @@
 /* src/app/student/student.component.css */
 
 .section {
-  margin: 20px 0;
+  margin: 1rem;
   border: 1px solid #ccc;
+  border-radius: 10px;
   padding: 10px;
   background-color: #f5f5f5;
+  min-width: 14rem;
+  // min-height: 18rem;
+  flex: 1
 }
 
 h3 {
   font-size: 18px;
   margin-bottom: 10px;
+  border-bottom: 1px solid #ccc;
 }
 
 .mainCont {
-    padding: 20px;
-    height: 90vh;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-evenly;
+  height: 100vh;
+  overflow-y: scroll;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  padding: 1rem;
+  justify-content: space-between;
+  align-items: center;
+  background-image: url("/assets/8767770.jpg");
+  background-size: cover;
 }
 
 .example-card {
-  width: 400px; /* Adjust the width as needed */
+  width: 400px;
+  /* Adjust the width as needed */
   margin: 0 auto;
   text-align: left;
 }

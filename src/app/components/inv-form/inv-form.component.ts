@@ -240,6 +240,9 @@ export class InvFormComponent implements OnInit {
       error: (err) => {
         console.error(err);
         console.error(err);
+        this.snackBar.open('Something went wrong', 'error', {
+          duration: 5000,
+        });
       },
     });
   }
