@@ -35,3 +35,15 @@ a {
   text-decoration: none;
   color: white;
 }
+
+
+.adminLoginCont {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+
+  p {
+    margin: 0
+  }
+}
