@@ -9,13 +9,9 @@
           <mat-label>Type</mat-label>
           <mat-select formControlName="type" required>
             <mat-option value="bursary">Bursary</mat-option>
-            <mat-option value="scholarship" disabled="true"
-              >Scholarship</mat-option
-            >
+            <mat-option value="scholarship" disabled="true">Scholarship</mat-option>
           </mat-select>
-          <mat-error
-            *ngIf="basicDetailsForm.controls['type'].hasError('required')"
-          >
+          <mat-error *ngIf="basicDetailsForm.controls['type'].hasError('required')">
             Type is <strong>required</strong>
           </mat-error>
         </mat-form-field>
@@ -26,22 +22,23 @@
             <mat-option value="highschool">High School</mat-option>
             <mat-option value="tertiary">Tertiary Inst</mat-option>
           </mat-select>
-          <mat-error
-            *ngIf="basicDetailsForm.controls['education'].hasError('required')"
-          >
+          <mat-error *ngIf="basicDetailsForm.controls['education'].hasError('required')">
             Course is <strong>required</strong>
           </mat-error>
         </mat-form-field>
       </form>
       <button mat-raised-button color="primary" [disabled]="!basicDetailsForm.valid">
         <!-- <p> -->
-          <a routerLink="/apply"> Proceed </a>
+        <a routerLink="/apply"> Proceed </a>
         <!-- </p> -->
       </button>
-      <hr>
-      <div>
-        <button mat-raised-button color="primary">
-            <a href="https://mig-bursary.com/admin/login"> Admin Login </a>
+      <div class="mt-4 d-flex flex-column align-items-center ">
+        <p>
+          Are you an admin ?
+        </p>
+        <hr>
+        <button mat-raised-button class="btn btn-sm" color="secondary">
+          <a href="https://mig-bursary.com/admin/login"> Admin Login </a>
         </button>
       </div>
     </div>
